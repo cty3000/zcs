@@ -1,0 +1,37 @@
+include "ZCS.tdl";
+
+resource SignedToken GET "/saml/login?url={url}" {
+    URL url;
+    String location (header="Location", out); //return location for subsequent patch requests
+    authenticate;
+    exceptions {
+        ResourceError BAD_REQUEST;
+        ResourceError FORBIDDEN;
+        ResourceError UNAUTHORIZED;
+        ResourceError TOO_MANY_REQUESTS;
+    }
+}
+
+//resource String POST "/saml/acs?SAMLResponse={samlResponse}&RelayState={relayState}" {
+resource String POST "/saml/acs" {
+    SamlResponse samlResponse;
+    //RelayState relayState;
+    String location (header="Location", out); //return location for subsequent patch requests
+    exceptions {
+        ResourceError BAD_REQUEST;
+        ResourceError FORBIDDEN;
+        ResourceError UNAUTHORIZED;
+        ResourceError TOO_MANY_REQUESTS;
+    }
+}
+
+resource String GET "/saml/logout?url={url}" {
+    URL url;
+    String location (header="Location", out); //return location for subsequent patch requests
+    exceptions {
+        ResourceError BAD_REQUEST;
+        ResourceError FORBIDDEN;
+        ResourceError UNAUTHORIZED;
+        ResourceError TOO_MANY_REQUESTS;
+    }
+}

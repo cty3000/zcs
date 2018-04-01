@@ -1,0 +1,5 @@
+name ZCS;
+version 1;
+namespace com.yahoo.athenz.zcs;
+
+include "ZCS.rdli";
